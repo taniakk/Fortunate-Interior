@@ -94,22 +94,195 @@
 </head>
 <body class="text-charcoal antialiased overflow-x-hidden">
 
-  <!-- ===== HEADER ===== -->
-  <header class="fixed inset-x-0 top-0 z-50 px-4 pt-4">
-    <nav class="mx-auto flex max-w-6xl items-center justify-between rounded-full bg-cream/85 px-6 py-3.5 shadow-lg shadow-forest/5 backdrop-blur-md border border-sand/50">
-      <a href="#top" class="flex items-center gap-2.5 font-display text-xl font-bold text-forest">
-        <span class="grid h-9 w-9 place-items-center rounded-full bg-forest text-sand text-sm">F</span>
-        Fortunate Interio
+<!-- ===== HEADER ===== -->
+<header class="fixed inset-x-0 top-0 z-50 px-4 pt-4">
+  <nav
+    class="mx-auto flex max-w-6xl items-center justify-between rounded-full
+           bg-cream/85 px-4 py-3 shadow-lg shadow-forest/5
+           backdrop-blur-md border border-sand/50
+           sm:px-6 sm:py-3.5"
+  >
+
+    <!-- LOGO -->
+    <a href="#top" class="flex items-center shrink-0">
+      <img
+        src="/images/fortunate_logo.webp"
+        alt="Fortunate Interio"
+        class="h-10 w-32 object-contain object-left
+               sm:h-12 sm:w-40
+               md:h-14 md:w-44"
+      />
+    </a>
+
+    <!-- DESKTOP NAVIGATION -->
+    <div class="hidden gap-8 text-sm font-medium text-forest/70 md:flex">
+      <a href="#about" class="transition-colors duration-300 hover:text-terracotta">
+        About
       </a>
-      <div class="hidden gap-8 text-sm font-medium text-forest/70 md:flex">
-        <a href="#about" class="hover:text-terracotta transition-colors duration-300">About</a>
-        <a href="#collection" class="hover:text-terracotta transition-colors duration-300">Collection</a>
-        <a href="#portfolio" class="hover:text-terracotta transition-colors duration-300">Portfolio</a>
-        <a href="#contact" class="hover:text-terracotta transition-colors duration-300">Contact</a>
-      </div>
-      <a href="#contact" class="rounded-full bg-forest px-6 py-2.5 text-sm font-semibold text-white btn-lift hover:bg-terracotta">Request a Quote</a>
-    </nav>
-  </header>
+
+      <a href="#collection" class="transition-colors duration-300 hover:text-terracotta">
+        Collection
+      </a>
+
+      <a href="#portfolio" class="transition-colors duration-300 hover:text-terracotta">
+        Portfolio
+      </a>
+
+      <a href="#contact" class="transition-colors duration-300 hover:text-terracotta">
+        Contact
+      </a>
+    </div>
+
+    <!-- DESKTOP CTA -->
+    <a
+      href="#contact"
+      class="hidden rounded-full bg-forest px-6 py-2.5 text-sm font-semibold
+             text-white btn-lift transition-colors duration-300
+             hover:bg-terracotta md:inline-block"
+    >
+      Request a Quote
+    </a>
+
+    <!-- MOBILE MENU BUTTON -->
+    <button
+      id="mobile-menu-btn"
+      type="button"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="flex h-10 w-10 items-center justify-center rounded-full
+             text-forest transition-colors duration-300
+             hover:bg-sand/50 md:hidden"
+    >
+      <!-- Hamburger icon -->
+      <svg
+        id="icon-open"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+
+      <!-- Close icon -->
+      <svg
+        id="icon-close"
+        xmlns="http://www.w3.org/2000/svg"
+        class="hidden h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+  </nav>
+
+  <!-- MOBILE MENU PANEL -->
+  <div
+    id="mobile-menu"
+    class="mx-auto mt-2 max-w-6xl overflow-hidden rounded-3xl
+           bg-cream/95 shadow-lg shadow-forest/5
+           backdrop-blur-md border border-sand/50
+           transition-all duration-300 ease-out
+           md:hidden
+           max-h-0 opacity-0 invisible"
+  >
+    <div class="flex flex-col gap-1 px-4 py-4 text-sm font-medium text-forest/80">
+      <a href="#about" class="rounded-2xl px-4 py-3 transition-colors duration-300 hover:bg-sand/50 hover:text-terracotta">
+        About
+      </a>
+
+      <a href="#collection" class="rounded-2xl px-4 py-3 transition-colors duration-300 hover:bg-sand/50 hover:text-terracotta">
+        Collection
+      </a>
+
+      <a href="#portfolio" class="rounded-2xl px-4 py-3 transition-colors duration-300 hover:bg-sand/50 hover:text-terracotta">
+        Portfolio
+      </a>
+
+      <a href="#contact" class="rounded-2xl px-4 py-3 transition-colors duration-300 hover:bg-sand/50 hover:text-terracotta">
+        Contact
+      </a>
+
+      <a
+        href="#contact"
+        class="mt-2 rounded-full bg-forest px-6 py-3 text-center text-sm
+               font-semibold text-white transition-colors duration-300
+               hover:bg-terracotta"
+      >
+        Request a Quote
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== MOBILE MENU SCRIPT ===== -->
+<script>
+  (function () {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('icon-open');
+    const iconClose = document.getElementById('icon-close');
+
+    let isOpen = false;
+
+    function openMenu() {
+      isOpen = true;
+      menu.classList.remove('max-h-0', 'opacity-0', 'invisible');
+      menu.classList.add('max-h-[500px]', 'opacity-100', 'visible');
+      iconOpen.classList.add('hidden');
+      iconClose.classList.remove('hidden');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMenu() {
+      isOpen = false;
+      menu.classList.add('max-h-0', 'opacity-0', 'invisible');
+      menu.classList.remove('max-h-[500px]', 'opacity-100', 'visible');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', function () {
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    // Auto-close on scroll (mobile only)
+    let lastScrollY = window.scrollY;
+    window.addEventListener(
+      'scroll',
+      function () {
+        // Only run on mobile widths and when menu is open
+        if (window.innerWidth >= 768 || !isOpen) return;
+
+        const currentScrollY = window.scrollY;
+        // Close as soon as user scrolls a meaningful amount
+        if (Math.abs(currentScrollY - lastScrollY) > 10) {
+          closeMenu();
+        }
+        lastScrollY = currentScrollY;
+      },
+      { passive: true }
+    );
+
+    // Close when a link inside the menu is clicked
+    menu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close if resized up to desktop
+    window.addEventListener('resize', function () {
+      if (window.innerWidth >= 768 && isOpen) closeMenu();
+    });
+  })();
+</script>
 
   <main id="top">
 
