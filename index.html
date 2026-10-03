@@ -535,6 +535,64 @@
   </div>
 </section>
 
+<script>
+  // Portfolio data — pair each name with a matching image
+  var portfolio = [
+    { name: 'Living Room',    img: '/images/fortunate_interio_1.webp' },
+    { name: 'Modular Kitchen', img: '/images/fortunate_interio_2.webp' },
+      { name: 'Bedroom',        img: '/images/fortunate_interio_3.webp' },
+      { name: 'Dining Area',    img: '/images/fortunate_interio_4.webp' },
+    { name: 'Study',          img: '/images/fortunate_interio_5.webp' },
+    { name: 'Wardrobe',       img: '/images/fortunate_interio_6.webp' },
+    { name: 'Balcony',        img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80' },
+    { name: 'Pooja Room',     img: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&q=80' },
+    { name: 'Kids Room',      img: 'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=600&q=80' },
+    { name: 'Office',         img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80' },
+    { name: 'Foyer',          img: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80' },
+    { name: 'Lounge',         img: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80' }
+  ];
+
+  var g = document.getElementById('grid');
+
+  portfolio.forEach(function (item, i) {
+    var tile = document.createElement('a');
+    tile.href = '#';
+    // stagger animation delay a little
+    tile.setAttribute('data-aos', 'zoom-in');
+    tile.setAttribute('data-aos-delay', String((i % 4) * 80));
+
+    tile.className =
+      'group relative block overflow-hidden rounded-2xl sm:rounded-[1.5rem] ' +
+      'premium-shadow img-hover aspect-[4/5] sm:aspect-square';
+
+    tile.innerHTML =
+      '<img src="' + item.img + '" alt="' + item.name + '" ' +
+      'class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" ' +
+      'loading="lazy">' +
+      // gradient overlay so text is always readable
+      '<div class="absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/20 to-transparent"></div>' +
+      // label
+      '<div class="absolute inset-x-0 bottom-0 p-3 sm:p-4">' +
+        '<h3 class="font-display text-sm sm:text-base md:text-lg font-bold text-white leading-tight">' +
+          item.name +
+        '</h3>' +
+        '<span class="mt-1 inline-flex items-center text-[10px] sm:text-xs font-semibold text-terracotta opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">' +
+          'VIEW PROJECT' +
+          '<svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">' +
+            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>' +
+          '</svg>' +
+        '</span>' +
+      '</div>';
+
+    g.appendChild(tile);
+  });
+
+  // Refresh AOS so the newly-added tiles animate in
+  if (window.AOS && typeof AOS.refresh === 'function') {
+    AOS.refresh();
+  }
+</script>
+
 <!-- ===== CONTACT ===== -->
 <section id="contact" class="px-5 pb-20 sm:pb-24 md:pb-28">
   <div class="mx-auto grid max-w-6xl gap-8 sm:gap-10 md:gap-12 rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] bg-gradient-to-br from-forest to-[#2D5A4E] p-6 sm:p-10 md:p-16 premium-shadow md:grid-cols-2" data-aos="fade-up">
@@ -610,10 +668,7 @@
       offset: 80
     });
 
-    // Portfolio tiles
-    var cols = ['#C97B5D', '#B8D4C8', '#D9A796', '#2D5A4E', '#1A3C34', '#F5EDE4'];
-    var names = ['Living Room', 'Modular Kitchen', 'Bedroom', 'Dining Area', 'Study', 'Wardrobe', 'Balcony', 'Pooja Room', 'Kids Room', 'Office', 'Foyer', 'Lounge'];
-    var g = document.getElementById('grid');
+
 
     names.forEach(function(t, i) {
       var c = cols[i % 6];
